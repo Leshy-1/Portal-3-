@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CameraControl : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class CameraControl : MonoBehaviour
 
     void CameraRotation()
     {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSenistivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSenistivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Math.Clamp(xRotation, -90f, 88f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(eulers: Vector3.up * mouseX);
 
     }
 }
